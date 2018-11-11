@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [ $# -ne 2 ]
+  then
+    echo "Usage: git from [source branch] [new branch]"
+    exit 1
+fi
+
+git stash \
+    && git checkout $1 \
+    && git pull \
+    && git checkout -b $2
