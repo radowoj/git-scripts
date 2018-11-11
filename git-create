@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+if [ $# -ne 1 ]
+  then
+    echo "Usage: git create [new branch]"
+    exit 1
+fi
+
+git from develop $1
