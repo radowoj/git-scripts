@@ -5,8 +5,10 @@ Skrypty usprawniające pracę z gałęziami, a'la git flow.
 
 ## Instalacja
 
-Wystarczy wrzucić do katalogu będącego w `$PATH` i nadać prawa `+x`
+1. Klonujemy repo
+2. W katalogu, do którego sklonowaliśmy odpalamy `make`
 
+## Skrypty
 
 ### git from
 
