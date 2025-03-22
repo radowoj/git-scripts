@@ -1,23 +1,22 @@
-# Git scripts
+# Radowoj's Git Scripts
 
-Skrypty usprawniające pracę z gałęziami, a'la git flow.
+Lazy person's shortcuts for streamlining git-flow-ish workflow.
 
+## Installation
 
-## Instalacja
+1. Clone the repository
+2. In the directory where the repository was cloned, run `make`
 
-1. Klonujemy repo
-2. W katalogu, do którego sklonowaliśmy odpalamy `make`
-
-## Skrypty
+## Scripts
 
 ### git from
 
-Użycie: `git create [gałąź źródłowa] [gałąź docelowa]`
+Usage: `git from [source branch] [target branch]`
 
-Tworzy `[gałąź docelowa]` na podstawie aktualnej wersji `[gałąź źródłowa]`
+Creates `[target branch]` based on the current version of `[source branch]`.
 
-### git create
+### git flush
 
-Użycie `git create [nazwa gałęzi]` 
+An alias for `git push --force-with-lease --force-if-includes`
 
-Równoważne: `git from develop [nazwa gałęzi]` - tworzy nową gałąź na podstawie developa.
+Usage: `git flush`
