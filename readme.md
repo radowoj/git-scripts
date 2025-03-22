@@ -17,6 +17,6 @@ Creates `[target branch]` based on the current version of `[source branch]`.
 
 ### git flush
 
-An alias for `git push --force-with-lease --force-if-includes`
-
 Usage: `git flush`
+
+An alias for `git push --force-with-lease --force-if-includes`
