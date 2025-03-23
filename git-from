@@ -10,4 +10,4 @@ git stash \
     && git switch "$1" \
     && git pull origin "$1":"$1" \
     && git switch -c "$2" "$1"
-echo "\n\n If you want to include recent work (which was stashed on running git from), remember to run git stash pop"
+echo "If you want to include recent work (which was stashed on running git from), remember to run git stash pop"
