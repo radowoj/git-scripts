@@ -1,13 +1,41 @@
 #!/usr/bin/env bash
 
-if [ $# -ne 2 ]
-  then
+if [ $# -ne 2 ]; then
     echo "Usage: git from [source branch] [new branch]"
     exit 1
 fi
 
-git stash \
-    && git switch "$1" \
+ORIGINAL_BRANCH=$(git branch --show-current)
+
+STASH_OUTPUT=$(git stash 2>&1)
+STASH_EXIT=$?
+
+if [ $STASH_EXIT -ne 0 ]; then
+    echo "$STASH_OUTPUT"
+    exit 1
+fi
+
+STASHED=true
+if echo "$STASH_OUTPUT" | grep -q "No local changes to save"; then
+    STASHED=false
+fi
+
+if git switch "$1" \
     && git pull origin "$1":"$1" \
-    && git switch -c "$2" "$1"
-echo "If you want to include recent work (which was stashed on running git from), remember to run git stash pop"
+    && git switch -c "$2" "$1"; then
+
+    printf "\n\033[32m✅ Branch \033[1m%s\033[0;32m created from \033[1m%s\033[0;32m.\033[0m\n" "$2" "$1"
+    if [ "$STASHED" = true ]; then
+        printf "\033[33m⚠️  Your uncommitted changes were stashed. Run \033[1mgit stash pop\033[0;33m to restore them.\033[0m\n"
+    fi
+else
+    printf "\n\033[31m❌ Branch creation failed.\033[0m\n"
+    if [ -n "$ORIGINAL_BRANCH" ]; then
+        git switch "$ORIGINAL_BRANCH" 2>/dev/null
+    fi
+    if [ "$STASHED" = true ]; then
+        git stash pop 2>/dev/null
+        printf "\033[33m⚠️  Your stashed changes have been restored.\033[0m\n"
+    fi
+    exit 1
+fi
